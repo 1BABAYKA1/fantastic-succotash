@@ -1,0 +1,23 @@
+import requests
+
+mytoken = 'ppo_10_15261'
+day = '04'
+month = '03'
+year = '23'
+url = f"https://dt.miet.ru/ppo_it_final?day={day}&month={month}&year={year}"
+headers = {
+"X-Auth-Token": mytoken
+}
+
+response = requests.get(url, headers=headers)
+
+if response.status_code == 200:
+    try:
+        response_json = response.json()
+        print(response_json["message"]["windows"]["data"])
+        # dict = response_json["message"]["windows"]["data"]
+        # keys_f = dict.keys()
+        # for i in keys_f:
+        #     print(i)
+    except ValueError:
+        print("Response is not a valid JSON")
